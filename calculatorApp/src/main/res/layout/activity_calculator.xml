@@ -4,11 +4,225 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:context=".ui.CalculatorActivity">
 
-<GridLayout
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:background="@color/colorView"/>
+    <EditText
+        android:id="@+id/calculator_screen"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/screen_height"
+        app:layout_constraintBottom_toTopOf="@id/calculator_grid"
+        app:layout_constraintEnd_toEndOf="@id/calculator_grid"
+        app:layout_constraintStart_toStartOf="@id/calculator_grid"
+        app:layout_constraintTop_toTopOf="@id/upper_guide"
+        style="@style/SimpleTextstyle.Italic"
+        android:hint="@string/screen_hint_txt"
+        android:textColorHint="@color/colorHint"
+        android:background="@drawable/screen_shape"
+        android:inputType="number"
+        android:paddingEnd="10dp"
+        android:elevation="10dp"/>
+
+    <GridLayout
+        android:id="@+id/calculator_grid"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/lower_guide"
+        app:layout_constraintEnd_toEndOf="@id/end_guide"
+        app:layout_constraintStart_toStartOf="@id/start_guide"
+        app:layout_constraintTop_toBottomOf="@id/calculator_screen"
+        android:columnCount="4"
+        android:rowCount="5"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        >
+
+        <!-- Row 1 -->
+        <Button
+            style="@style/ButtonStyle.Symbol"
+            android:text="C"
+            android:layout_row="0"
+            android:layout_column="0"            
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            />
+        <ImageButton
+            style="@style/ButtonStyle.Symbol"
+            android:src="@android:drawable/ic_input_delete"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+        <Button
+            style="@style/ButtonStyle.Symbol"
+            android:text="CUR"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+        <Button
+            style="@style/ButtonStyle.Symbol"
+            android:text="/"
+            android:layout_row="0"
+            android:layout_column="3"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+           />
+        <!--Row 2-->
+        <Button
+            style="@style/ButtonStyle.Number"
+            android:text="7"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+           />
+        <Button
+            style="@style/ButtonStyle.Number"
+            android:text="8"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+        <Button
+            style="@style/ButtonStyle.Number"
+            android:text="9"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+        <Button
+            style="@style/ButtonStyle.Symbol"
+            android:text="x"
+            android:layout_row="1"
+            android:layout_column="3"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            />
+        <!--Row 3-->
+        <Button
+            style="@style/ButtonStyle.Number"
+            android:text="4"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            />
+        <Button
+            style="@style/ButtonStyle.Number"
+            android:text="5"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+        <Button
+            style="@style/ButtonStyle.Number"
+            android:text="6"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+        <Button
+            style="@style/ButtonStyle.Symbol"
+            android:text="-"
+            android:layout_row="2"
+            android:layout_column="3"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            />
+        <!--Row 4-->
+        <Button
+            style="@style/ButtonStyle.Number"
+            android:text="1"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+           />
+        <Button
+            style="@style/ButtonStyle.Number"
+            android:text="2"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+        <Button
+            style="@style/ButtonStyle.Number"
+            android:text="3"
+            android:layout_row="3"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+        <Button
+            style="@style/ButtonStyle.Symbol"
+            android:text="+"
+            android:layout_row="3"
+            android:layout_column="3"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            />
+        <!--Row 5-->
+        <Button
+            style="@style/ButtonStyle.Symbol"
+            android:text="+/-"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            />
+        <Button
+            style="@style/ButtonStyle.Number"
+            android:text="0"
+            android:layout_row="4"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+        <Button
+            style="@style/ButtonStyle.Symbol"
+            android:text="."
+            android:layout_row="4"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
+        <Button
+            style="@style/ButtonStyle.Symbol"
+            android:text="="
+            android:layout_row="4"
+            android:layout_column="3"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            />
+
+    </GridLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/lower_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/upper_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,13 @@
     <color name="colorPrimary">#2979ff</color>
     <color name="colorPrimaryDark">#004ecb</color>
     <color name="colorSymbol">#D81B60</color>
+    <color name="colorSymbolLight">#c51162</color>
     <color name="colorView"> #ff9800</color>
     <color name="colorAccent">#ffc107</color>
     <color name="colorSplash">#448aff</color>
-
-
-
+    <color name="colorBlack">#000000</color>
+    <color name="colorHint">#a1887f</color>
+    <color name="colorGrey">#8d8d8d</color>
+    <color name="colorLightGrey">#bdbdbd</color>
+    <color name="colorExtraLightGrey">#efefef</color>
 </resources>

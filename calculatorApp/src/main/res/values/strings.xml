@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CalculatOr</string>
+    <string name="screen_hint_txt">Calculate...</string>
 </resources>
