@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon_calculator_small"
         android:supportsRtl="true"
-        android:theme="@style/CalcTheme">
+        android:theme="@style/CalcTheme"
+        android:screenOrientation="portrait" >
         <activity android:name=".ui.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -16,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.CalculatorActivity"></activity>
+        <activity android:name=".ui.CalculatorActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

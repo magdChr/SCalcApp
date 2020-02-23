@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="screen_height">85dp</dimen>
+    <dimen name="screen_height">90dp</dimen>
     <dimen name="screen_text_size">20dp</dimen>
     <dimen name="grid_text_size">22dp</dimen>
 
