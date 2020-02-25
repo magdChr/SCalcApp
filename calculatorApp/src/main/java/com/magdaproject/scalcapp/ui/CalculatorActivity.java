@@ -3,6 +3,8 @@ package com.magdaproject.scalcapp.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,11 +13,21 @@ import android.widget.Button;
 import com.magdaproject.scalcapp.R;
 import com.magdaproject.scalcapp.databinding.ActivityCalculatorBinding;
 import com.magdaproject.scalcapp.listeners.ActionClickListener;
+import com.magdaproject.scalcapp.models.BaseCurrencyModel;
+import com.magdaproject.scalcapp.services.ApiResponse;
+import com.magdaproject.scalcapp.viewmodel.CalculatorViewModel;
 
 public class CalculatorActivity extends AppCompatActivity {
 
     private ActivityCalculatorBinding mActivityCalculatorBinding;
-    private String currentValue = "";
+
+    private CalculatorViewModel calculatorViewModel;
+
+    private boolean isDecimal;
+
+    private String operator = "";
+
+    private boolean isOperatorClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +37,26 @@ public class CalculatorActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) mActivityCalculatorBinding.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         mActivityCalculatorBinding.setClickListener(mActionClickListener);
+        calculatorViewModel = ViewModelProviders.of(this).get(CalculatorViewModel.class);
+        calculatorViewModel.retreiveCurrencies();
+        calculatorViewModel.getCurrencies().observe(this, new Observer<ApiResponse<BaseCurrencyModel>>() {
+            @Override
+            public void onChanged(ApiResponse<BaseCurrencyModel> baseCurrencyModelApiResponse) {
+                if (baseCurrencyModelApiResponse.getStatus().equals(ApiResponse.Status.ERROR)) {
+                } else if (baseCurrencyModelApiResponse.getStatus().equals(ApiResponse.Status.SUCCESS)) {
+                    baseCurrencyModelApiResponse.getData().getRates();
 
+                }
+            }
+        });
+        calculatorViewModel.getScreenValue().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                mActivityCalculatorBinding.calculatorScreen.setText(s);
+            }
+        });
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -39,51 +69,68 @@ public class CalculatorActivity extends AppCompatActivity {
         public void onItemClicked(View v) {
             switch (v.getId()) {
                 case R.id.btn_currency:
-                    mActivityCalculatorBinding.calculatorScreen.setText("currency_call");
+                    calculatorViewModel.setScreenValue("currency_change");
                     break;
                 case R.id.btn_clearAll:
-                    mActivityCalculatorBinding.calculatorScreen.setText("");
-                   // currentValue = "";
+                    calculatorViewModel.setScreenValue("");
+                    calculatorViewModel.setCurrentValue(0);
+                    calculatorViewModel.setPreviousValue(0);
+                    calculatorViewModel.setTempValue(0);
+                    calculatorViewModel.setOperator("");
+                    calculatorViewModel.setIsOperatorClicked(false);
+                    // currentValue = "";
                     break;
                 case R.id.btn_clear:
-                    if(currentValue.length() > 0)
-                    mActivityCalculatorBinding.calculatorScreen.setText(currentValue.substring(0,currentValue.length()-1));
+                    if (calculatorViewModel.getScreenValue().getValue().length() > 0) {
+                        calculatorViewModel.setScreenValue(calculatorViewModel.getScreenValue().getValue().substring(0, calculatorViewModel.getScreenValue().getValue().length() - 1));
+
+                    }
+                    break;
+                case R.id.btn_equals:
+
+                    calculatorViewModel.calculate(((Button) v).getText().toString());
 
                     break;
-                default:
-                    mActivityCalculatorBinding.calculatorScreen.setText(currentValue + ((Button) v).getText().toString());
-                  //  currentValue = mActivityCalculatorBinding.calculatorScreen.getText().toString();
+                case R.id.btn_plus:
+                    calculatorViewModel.calculate(((Button) v).getText().toString());
+
+
                     break;
-            }currentValue = mActivityCalculatorBinding.calculatorScreen.getText().toString();
-            //  break;
-//              case R.id.btn_two:
-//                  mActivityCalculatorBinding.calculatorScreen.setText("2");
-//                  break;
-//              case R.id.btn_three:
-//                  mActivityCalculatorBinding.calculatorScreen.setText("3");
-//                  break;
-//              case R.id.btn_four:
-//                  mActivityCalculatorBinding.calculatorScreen.setText("4");
-//                  break;
-//              case R.id.btn_five:
-//                  mActivityCalculatorBinding.calculatorScreen.setText("5");
-//                  break;
-//              case R.id.btn_six:
-//                  mActivityCalculatorBinding.calculatorScreen.setText("6");
-//                  break;
-//              case R.id.btn_seven:
-//                  mActivityCalculatorBinding.calculatorScreen.setText("7");
-//                  break;
-//              case R.id.btn_eight:
-//                  mActivityCalculatorBinding.calculatorScreen.setText("8");
-//                  break;
-//              case R.id.btn_nine:
-//                  mActivityCalculatorBinding.calculatorScreen.setText("9");
-//                  break;
-//              case R.id.btn_zero:
-//                  mActivityCalculatorBinding.calculatorScreen.setText("0");
-//                  break;
+
+                case R.id.btn_minus:
+
+                    calculatorViewModel.calculate(((Button) v).getText().toString());
+
+
+                    break;
+                case R.id.btn_multi:
+                    calculatorViewModel.calculate(((Button) v).getText().toString());
+
+
+                    break;
+                case R.id.btn_div:
+                    calculatorViewModel.calculate(((Button) v).getText().toString());
+
+
+                    break;
+                case R.id.btn_dec:
+
+                default:
+                    if(calculatorViewModel.getIsOperatorClicked().getValue()){
+                        calculatorViewModel.setTempValue(calculatorViewModel.getPreviousValue().getValue());
+                        calculatorViewModel.setPreviousValue(0);
+                    }
+                    calculatorViewModel.setCurrentValue(Integer.parseInt(calculatorViewModel.getPreviousValue().getValue().toString() + ((Button) v).getText().toString()));
+                    calculatorViewModel.setScreenValue((calculatorViewModel.getScreenValue().getValue() != null ? calculatorViewModel.getScreenValue().getValue() : "") + ((Button) v).getText().toString());
+                    calculatorViewModel.setPreviousValue(calculatorViewModel.getCurrentValue().getValue());
+                    calculatorViewModel.setIsOperatorClicked(false);
+
+                    break;
+            }
         }
     };
-    // };
+
+  private int getOperator(){
+      return Integer.parseInt(operator);
+  }
 }

@@ -69,7 +69,7 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:onClick="@{(view) ->  clickListener.onItemClicked(view)}"/>
-        <Button
+        <Spinner
             android:id="@+id/btn_currency"
             style="@style/ButtonStyle.Symbol"
             android:text="CUR"
@@ -77,7 +77,7 @@
             android:layout_column="2"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            android:onClick="@{(view) ->  clickListener.onItemClicked(view)}"/>
+            />
         <Button
             android:id="@+id/btn_div"
             style="@style/ButtonStyle.Symbol"
@@ -118,7 +118,7 @@
         <Button
             android:id="@+id/btn_multi"
             style="@style/ButtonStyle.Symbol"
-            android:text="x"
+            android:text="*"
             android:layout_row="1"
             android:layout_column="3"
             android:layout_columnWeight="1"

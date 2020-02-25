@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.magdaproject.scalcapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon_calculator_small"
@@ -9,7 +11,8 @@
         android:roundIcon="@drawable/icon_calculator_small"
         android:supportsRtl="true"
         android:theme="@style/CalcTheme"
-        android:screenOrientation="portrait" >
+        android:screenOrientation="portrait"
+        android:usesCleartextTraffic="true">
         <activity android:name=".ui.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
